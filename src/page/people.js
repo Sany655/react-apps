@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { addDoc, collection, doc, getDoc, getDocs, getFirestore, limit, onSnapshot, orderBy, query, serverTimestamp, setDoc, where } from 'firebase/firestore'
 import Spinner from '../components/Spinner'
-
 const People = () => {
     const user = useSelector(state => state.auth).user
     const [peoples, setPeoples] = useState([])

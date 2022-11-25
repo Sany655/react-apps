@@ -2,7 +2,7 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, getFirestore, serverTimestamp, setDoc } from "firebase/firestore";
 import { useState } from "react";
 import SignWithGoogle from "../components/SignWithGoogle";
-import withPublic from "./middlewares/Public";
+import React from "react";
 
 const Register = () => {
     const [form, setForm] = useState({

@@ -3,12 +3,13 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { Outlet } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import StateChange from './redux/StateChange.js';
-import useCall, { CallProvider } from './service/CallProvider.js';
-import Header from './components/Header.js';
-import AudioCall from './components/AudioCall.js';
-import store from "./redux/store.js";
-import app from "./firebase.js";
+import StateChange from './redux/StateChange';
+import useCall, { CallProvider } from './service/CallProvider';
+import Header from './components/Header';
+import AudioCall from './components/AudioCall';
+import store from "./redux/store";
+import app from "./firebase";
+import React from 'react'
 
 function App() {
     return (

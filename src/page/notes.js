@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { addDoc, collection, deleteDoc, doc, getFirestore, onSnapshot, orderBy, query, serverTimestamp } from 'firebase/firestore'
 import Spinner from '../components/Spinner'
-import EditorJS from "https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest";
 const Notes = () => {
     const [notes, setNotes] = useState([])
     const [text, setText] = useState('')

@@ -1,7 +1,7 @@
 import { getAuth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth"
 import { useState } from "react"
 import SignWithGoogle from "../components/SignWithGoogle"
-import withPublic from "./middlewares/Public"
+import React from "react";
 const Login = () => {
     const [form, setForm] = useState({
         email: "asd@asd.com",

@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Spinner from '../components/Spinner'
 import useCall from '../service/CallProvider'
-
 const Inbox = () => {
     const { audioCall } = useCall()
     const { inbox, loading } = useSelector(state => state.inbox)
