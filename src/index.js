@@ -14,7 +14,7 @@ import Friend from './page/friend';
 import Inbox from './page/inbox';
 import People from './page/people';
 import Post from './page/post';
-import "bootstrap/dist/js/bootstrap.bundle";
+// import "bootstrap/dist/js/bootstrap.bundle";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 

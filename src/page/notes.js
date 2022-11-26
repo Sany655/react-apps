@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { addDoc, collection, deleteDoc, doc, getFirestore, onSnapshot, orderBy, query, serverTimestamp } from 'firebase/firestore'
 import Spinner from '../components/Spinner'
+import NoteComponent from '../components/NoteComponent'
 const Notes = () => {
     const [notes, setNotes] = useState([])
     const [text, setText] = useState('')
@@ -23,9 +24,9 @@ const Notes = () => {
             setNotes(snapshot.docs.map(doc => ({
                 id: doc.id,
                 text: doc.data().text,
-                tag: doc.data().tag?.join(' '),
+                tag: doc.data().tag,
                 timestamp: String(doc.data().timestamp?.toDate().toLocaleTimeString()) + ' - ' + String(doc.data().timestamp?.toDate().toLocaleDateString()),
-                updatedAt: String(doc.data().updatedAt?.toDate().toLocaleTimeString()) + ' - ' + String(doc.data().updatedAt?.toDate().toLocaleDateString())
+                updated: doc.data().updated?String(doc.data().updated?.toDate().toLocaleTimeString()) + ' - ' + String(doc.data().updated?.toDate().toLocaleDateString()):null
             })))
             setLoading(false)
         });
@@ -35,8 +36,8 @@ const Notes = () => {
         e.preventDefault()
         if (text.length !== 0 && tag.length !== 0) {
             addDoc(collection(getFirestore(), "notes", user.uid, 'note'), {
-                tag: tag.split(' '),
-                text: text.replace(/<br\s*\/?>/gi, "\n"),
+                tag: tag,
+                text: text,
                 timestamp: serverTimestamp()
             }).then(res => {
                 setText('')
@@ -49,7 +50,7 @@ const Notes = () => {
     function deleteNote(id) {
         if (window.confirm("Are sure to Delete this note?")) {
             deleteDoc(doc(getFirestore(), 'notes', user.uid, 'note', id)).then(res => {
-                console.log(res);
+                
             }).catch(err => {
                 console.log(err);
             })
@@ -93,13 +94,15 @@ const Notes = () => {
                         <div key={note.id} className="col-md-4 mb-5">
                             <div className="card">
                                 <div className="card-body overflow-auto" style={{ height: "250px" }}>
-                                    <p>{note.tag}</p>
-                                    <p>{note.timestamp}</p>
+                                    <h3>{note.tag}</h3>
+                                    <p className='m-0'>Added in {note.timestamp}</p>
+                                    {note.updated&&<p className='m-0'>Updated in {note.updated}</p>}
                                     <hr />
-                                    <p>{note.text}</p>
+                                    <pre>{note.text}</pre>
                                 </div>
                                 <div className="card-footer">
-                                    <button className="btn btn-danger btn-sm" onClick={() => deleteNote(note.id)}>Delete</button>
+                                    <button className="btn btn-danger btn-sm me-2" onClick={() => deleteNote(note.id)}>Delete</button>
+                                    <NoteComponent key={note.id} note={note} user={user} />
                                 </div>
                             </div>
                         </div>
